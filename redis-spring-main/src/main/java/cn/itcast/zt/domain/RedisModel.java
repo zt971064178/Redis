@@ -1,8 +1,9 @@
 package cn.itcast.zt.domain;
+import  java.io.Serializable ;
 /**
  * Created by zhangtian on 2017/4/25.
  */
-public class RedisModel {
+public class RedisModel implements Serializable {
     private String redisKey;// redis中的key
     private String name;// 姓名
     private String tel;// 电话
