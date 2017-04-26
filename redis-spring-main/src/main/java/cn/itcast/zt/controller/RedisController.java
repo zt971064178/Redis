@@ -2,6 +2,7 @@ package cn.itcast.zt.controller;
 
 import cn.itcast.zt.domain.RedisModel;
 import cn.itcast.zt.sevice.RedisServiceImpl;
+import cn.itcast.zt.utils.ProtostuffUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +41,30 @@ public class RedisController {
 
         System.out.println("add success end...");
     }
+
+    // ******************* 使用protostuff序列化对象存入Redis，取出Redsis，对象不必实现序列化接口 *******************/
+    // 添加
+    @GetMapping(value = "add2")
+    public void test2() {
+        System.out.println("start.....");
+        RedisModel m = new RedisModel();
+        m.setName("张三");
+        m.setTel("1111");
+        m.setAddress("深圳1");
+        m.setRedisKey("zhangsanKey04");
+        service.put(m.getRedisKey(), ProtostuffUtils.serializer(m), -1);
+
+        System.out.println("add success end...");
+    }
+
+    // 根据key查询
+    @GetMapping(value = "get2")
+    public Object get2() {
+        RedisModel m = new RedisModel();
+        m.setRedisKey("zhangsanKey04");
+        return ProtostuffUtils.deserializer((byte[])service.get(m.getRedisKey()),RedisModel.class);
+    }
+    // ******************* 使用protostuff序列化对象存入Redis中 *******************/
 
     // 查询所有对象
     @GetMapping(value = "getAll")

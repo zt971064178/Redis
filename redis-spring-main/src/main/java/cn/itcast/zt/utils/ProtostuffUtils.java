@@ -24,7 +24,6 @@ public class ProtostuffUtils {
 	private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<Class<?>, Schema<?>>() ;
 	
 	private static <T> Schema<T> getSchema(Class<T> clazz) {
-		@SuppressWarnings("unchecked")
 		Schema<T> schema = (Schema<T>) cachedSchema.get(clazz) ;
 		if(schema == null) {
 			schema = RuntimeSchema.getSchema(clazz) ;
@@ -85,7 +84,6 @@ public class ProtostuffUtils {
         if (objList == null || objList.isEmpty()) {
             throw new RuntimeException("序列化对象列表(" + objList + ")参数异常!");
         }
-        @SuppressWarnings("unchecked")
         Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema(objList.get(0).getClass());
         LinkedBuffer buffer = LinkedBuffer.allocate(1024 * 1024);
         byte[] protostuff = null;

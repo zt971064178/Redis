@@ -40,8 +40,15 @@ public class RedisConfig {
     private void initDomainRedisTemplate(RedisTemplate<String, Object> redisTemplate, RedisConnectionFactory factory) {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        /*redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());*/
+        /*
+        // 使用jdk原生序列化
+        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        // 使用自定义的对象序列化
+        redisTemplate.setHashValueSerializer(new RedisObjectSerializer());
+        redisTemplate.setValueSerializer(new RedisObjectSerializer());
+        */
+        // 使用fst快速序列化对象到redis中，对象必须实现序列化接口
         redisTemplate.setHashValueSerializer(new FastSerializer());
         redisTemplate.setValueSerializer(new FastSerializer());
 
