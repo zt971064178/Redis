@@ -2,6 +2,8 @@ package cn.itcast.zt;
 
 /**
  * http://www.cnblogs.com/relucent/p/4955340.html
+ * 基于redis的分布式ID生成器博客地址：
+ * http://blog.csdn.net/hengyunabc/article/details/44244951
  * Created by Administrator on 2017/5/3/003.
  */
 public class GlobalIdsTest {
