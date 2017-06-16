@@ -52,6 +52,19 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(new FastSerializer());
         redisTemplate.setValueSerializer(new FastSerializer());
 
+        /*//定义key序列化方式
+        //RedisSerializer<String> redisSerializer = new StringRedisSerializer();//Long类型会出现异常信息;需要我们上面的自定义key生成策略，一般没必要
+        //定义value的序列化方式
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        // template.setKeySerializer(redisSerializer);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();*/
+
         redisTemplate.setConnectionFactory(factory);
     }
 
